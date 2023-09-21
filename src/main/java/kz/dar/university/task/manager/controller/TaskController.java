@@ -1,5 +1,6 @@
 package kz.dar.university.task.manager.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import kz.dar.university.task.manager.domain.dto.TaskDTO;
 import kz.dar.university.task.manager.domain.dto.TaskResponse;
 import kz.dar.university.task.manager.service.TaskService;
@@ -39,7 +40,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public void createTask(@RequestBody @Valid TaskDTO taskDTO) {
+    public void createTask(@RequestBody @Valid TaskDTO taskDTO) throws JsonProcessingException {
         taskService.createTask(taskDTO);
     }
 

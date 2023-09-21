@@ -1,5 +1,7 @@
 package kz.dar.university.task.manager.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import kz.dar.university.task.manager.domain.dto.EmailDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,9 +19,11 @@ public class MessageSender {
     @Value("${spring.kafka.test.topic}")
     private String topicName;
 
-    public void sendMessage(EmailDTO email) {
+    private ObjectMapper objectMapper = new ObjectMapper();
+
+    public void sendMessage(EmailDTO email) throws JsonProcessingException {
         log.info("EMAIL TO SENT: " + email);
-        kafkaTemplate.send(topicName, String.valueOf(email));
+        kafkaTemplate.send(topicName, objectMapper.writeValueAsString(email));
     }
 
 }

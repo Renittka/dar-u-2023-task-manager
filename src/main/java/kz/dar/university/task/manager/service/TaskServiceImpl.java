@@ -1,5 +1,6 @@
 package kz.dar.university.task.manager.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import kz.dar.university.task.manager.domain.dto.ClientDTO;
 import kz.dar.university.task.manager.domain.dto.EmailDTO;
 import kz.dar.university.task.manager.domain.model.Task;
@@ -116,7 +117,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void createTask(TaskDTO taskDTO) {
+    public void createTask(TaskDTO taskDTO) throws JsonProcessingException {
         taskDTO.setTaskId(UUID.randomUUID().toString());
         taskDTO.setStatus(TaskStatus.TO_DO);
 
@@ -126,7 +127,7 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.save(task);
 
         EmailDTO email = new EmailDTO(
-                "email",
+                "testnotification123@mail.ru",
                 task.getTitle(),
                 String.format("New task: %s, status: %s", task.getTitle(), task.getStatus())
         );

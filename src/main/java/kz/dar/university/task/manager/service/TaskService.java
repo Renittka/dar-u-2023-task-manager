@@ -1,5 +1,6 @@
 package kz.dar.university.task.manager.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import kz.dar.university.task.manager.domain.dto.TaskDTO;
 import kz.dar.university.task.manager.domain.dto.TaskResponse;
 
@@ -13,7 +14,7 @@ public interface TaskService {
 
     List<TaskResponse> getTasksByUserId(String clientId);
 
-    void createTask(TaskDTO taskDTO);
+    void createTask(TaskDTO taskDTO) throws JsonProcessingException;
 
     void updateTask(TaskDTO taskDTO);
 
